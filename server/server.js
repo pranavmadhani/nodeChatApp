@@ -12,7 +12,7 @@ var io = socketIO(server)
 app.use(express.static(publicPath))
 
 
-io.on('connection',(socket)=>{
+io.on('connection',(socket)=>{  //reserved keyword
 
     console.log('new user connected')
 
@@ -23,7 +23,7 @@ io.on('connection',(socket)=>{
     //     text:"Hi! GOod MOrning"
     // })
 
-    socket.on('disconnect',()=>{
+    socket.on('disconnect',()=>{  //reserved keyword
         console.log('dis-connected') 
     })
 
@@ -35,8 +35,14 @@ io.on('connection',(socket)=>{
 
     })
     
-    socket.on('newMessage',function(newMsg){
-        console.log(newMsg);
+    socket.on('createMessage',function(newMsg){
+        console.log('create Message',newMsg);
+       
+        io.emit('newMessage',{
+            from:newMsg.from,
+            text: newMsg.text,
+            time: new Date()
+        })
     })
 
     socket.on('createEmail',function(dataOfEmail){
