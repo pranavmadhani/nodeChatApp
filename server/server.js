@@ -2,53 +2,39 @@ const path = require('path')
 const express = require('express')
 const http = require('http')
 const app = express()
-const {generateMessage} = require('./utils/mesage')
-
-const publicPath = path.join(__dirname,'../public')
+const {
+    generateMessage
+} = require('./utils/mesage')
+const publicPath = path.join(__dirname, '../public')
 console.log(publicPath)
-const PORT = process.env.PORT||3000;
+const PORT = process.env.PORT || 3000;
 const socketIO = require('socket.io')
 var server = http.createServer(app)
 var io = socketIO(server)
 app.use(express.static(publicPath))
 
 
-io.on('connection',(socket)=>{  //reserved keyword
-
+io.on('connection', (socket) => { //reserved keyword
     console.log('new user connected')
-
-    
-
-    socket.on('disconnect',()=>{  //reserved keyword
-        console.log('dis-connected') 
+    socket.on('disconnect', () => { //reserved keyword
+        console.log('dis-connected')
     })
 
-   socket.emit('newMessage',generateMessage('Admin','welcome to the chat app'))
-    
-socket.broadcast.emit('newMessage',generateMessage('Admin','New User joinned...'))
+    socket.emit('newMessage', generateMessage('Admin', 'welcome to the chat app')
+    )
+    socket.broadcast.emit('newMessage', generateMessage('Admin', 'New User joinned...'))
 
-    socket.on('createMessage',function(newMsg){
-        console.log('create Message',newMsg);
-       
-        io.emit('newMessage',generateMessage(newMsg.from,newMsg.text))
-
-
-        
+    socket.on('createMessage', function (newMsg) {
+        console.log('create Message', newMsg);
+        io.emit('newMessage', generateMessage(newMsg.from, newMsg.text))
     })
-
-    socket.on('createEmail',function(dataOfEmail){
+    
+    socket.on('createEmail', function (dataOfEmail) {
         console.log(dataOfEmail);
     })
-
-
 })
 
 
-
-
-server.listen(PORT,()=>{
-
-    console.log('server started at',PORT)
+server.listen(PORT, () => {
+    console.log('server started at', PORT)
 })
-
-
