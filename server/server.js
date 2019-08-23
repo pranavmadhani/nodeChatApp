@@ -26,9 +26,11 @@ io.on('connection', (socket) => { //reserved keyword
     )
     socket.broadcast.emit('newMessage', generateMessage('Admin', 'New User joinned...'))
 
-    socket.on('createMessage', function (newMsg) {
+    socket.on('createMessage', function (newMsg,callback) {
         console.log('create Message', newMsg);
         io.emit('newMessage', generateMessage(newMsg.from, newMsg.text))
+        callback('this is from server');
+        
     })
 
     socket.on('createLocationMessage',function(coords){
