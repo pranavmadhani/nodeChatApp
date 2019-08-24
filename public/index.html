@@ -4,35 +4,49 @@
 </head>
 <body class="chat">
     <div class="chat__sidebar">
-    <h3>People</h3>
-    <div id="users"></div>
+        <h3>People</h3>
+        <div id="users"></div>
     </div>
-   
     <div class="chat__main">
-
-            <ol id='messages' class="chat__messages">    
-                </ol>
-                <div class="chat__footer">
-                        <form id='message-form'>
-                                <input name="message" type='text' placeholder="enter message" autofocus autocomplete="off"/>
-                                <button>Send</button>
-                                <button id='send-location' >Location</button>
-                </div>
-                
-            
-               
-            </form>
-        
-           
-
+        <ol id='messages' class="chat__messages">
+        </ol>
+        <div class="chat__footer">
+            <form id='message-form'>
+                <input name="message" type='text' placeholder="enter message" autofocus autocomplete="off" />
+                <button>Send</button>
+                <button id='send-location'>Location</button>
+        </div>
+        </form>
     </div>
-   
-    
-   
+  
+    <script id="message-template" type="text/template">
+        <li class='message'>
+        <div class="message__title">
+        <h4> {{from}}</h4>
+        <span>{{createdAt}}</span>
+    </div>
+    <div class='message__body'></div>
+<p> {{text}} </p>
+    </li>
+</script>
+
+
+<script id="location-message-template" type="text/template">
+    <li class='message'>
+    <div class="message__title">
+    <h4> {{from}}</h4>
+    <span>{{createdAt}}</span>
+</div>
+<div class='message__body'></div>
+<p> <a href ="{{url}}" target="_blank">My Current Location</a> </p>
+</li>
+</script>
+
 
     <script src="jquery-3.4.1.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/index.js"> </script>
     <script src="/js/moment.js"> </script>
+    <script src="/js/mustache.js"> </script>
 </body>
 </html>
