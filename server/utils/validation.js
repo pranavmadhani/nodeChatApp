@@ -4,4 +4,4 @@ var isRealString = (str) => {
 
 
 
-module.exports = {isRealString,};
+module.exports = {isRealString};
