@@ -17,6 +17,7 @@
         	queryString[$1] = decodeURIComponent($3.replace(/\+/g, '%20'));
         }
       );
+      
       return queryString;
     };
 })(jQuery);

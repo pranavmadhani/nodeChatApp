@@ -13,14 +13,19 @@ function scrollToBottom () {
     messages.scrollTop(scrollHeight);
   }
 }
+
+
+
 socket.on('connect', function () {
   var params = jQuery.deparam(window.location.search);
+  
   socket.emit('join', params, function (err) {
     if (err) {
       alert(err);
       window.location.href = '/';
     } else {
       console.log('No error');
+     
     }
   });
 });
