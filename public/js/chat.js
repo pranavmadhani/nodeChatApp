@@ -92,6 +92,8 @@ calculateButton.on('click',function(){
 var messageTextbox = jQuery('[name=message]');
 socket.emit('performMath', {
     text:messageTextbox.val()
+  },function(){
+    alert('String is empty cannot proceed')
   });
 });
 

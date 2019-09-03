@@ -65,14 +65,27 @@ io.on('connection', (socket) => {
   });
 
 
-  socket.on('performMath',(regex)=>{
+  socket.on('performMath',(regex,callback)=>{
    
     let result = regex;
     var user = users.getUser(socket.id);
     
     console.log('I will perform Math operations',result.text.toString())
-    //socket.emit('performMath',mathOperations(result.text.toString()+"pranav"))
-   io.to(user.room).emit('newMessage', generateMessage(user.name,mathOperations(result.text.toString())));
+   
+    if(!isRealString(result.text.toString()))
+    {
+      console.log(result.text.toString()+" string is empty cannot proceed")
+      callback();
+     //return('empty string')
+    }
+
+    else{
+      io.to(user.room).emit('newMessage', generateMessage(user.name,mathOperations(result.text.toString()))); 
+    }
+    
+      
+    
+    
 
   });
 
